@@ -3,137 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ</title>
+    <title>ห้องเรียนครูวิมมี่ - การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #0f172a;
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+            --bg-color: #0f172a; /* พื้นหลังมืดสไตล์ Tech */
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
 
         body {
-            font-family: 'ChulaCharasNew', 'Sarabun', system-ui, -apple-system, sans-serif;
+            font-family: 'Sarabun', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* Header Section */
+        /* Hero Header Section */
         header {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, #1e3a8a 100%);
-            color: white;
-            padding: 50px 20px;
+            background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.15), transparent),
+                        radial-gradient(circle at bottom left, rgba(6, 182, 212, 0.1), transparent);
+            padding: 60px 20px 40px 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .header-container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .badge {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(6, 182, 212, 0.2);
         }
 
         header h1 {
-            margin: 0 0 10px 0;
-            font-size: 2.2rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            margin: 20px 0 10px 0;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         header p {
             margin: 0;
-            color: #93c5fd;
+            color: var(--text-muted);
             font-size: 1.1rem;
-            opacity: 0.9;
+            font-weight: 300;
         }
 
-        /* Main Content */
+        /* Main Grid Content */
         main {
-            max-width: 1100px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
             padding: 0 20px;
         }
 
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            border-left: 5px solid var(--primary-color);
-            padding-left: 12px;
-            margin-bottom: 25px;
-            margin-top: 40px;
-        }
-
-        /* Course Grid */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
         }
 
-        /* Assignment Grid for 008-012 */
-        .sub-grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
-        /* Card Styles */
+        /* Modern Glassmorphism Card */
         .card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
             text-decoration: none;
             color: inherit;
             display: flex;
             flex-direction: column;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(8px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            overflow: hidden;
         }
 
-        .card::before {
+        /* แสงวิบวับเวลา Hover */
+        .card::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--primary-color);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
+            inset: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: var(--primary-gradient);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            border-color: #bfdbfe;
+            transform: translateY(-8px) scale(1.01);
+            background: rgba(30, 41, 59, 0.9);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        .card:hover::before {
-            transform: scaleX(1);
+        .card:hover::after {
+            opacity: 1;
         }
 
-        .card-meta {
+        .card-number {
             font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--primary-color);
+            font-weight: 700;
+            color: #06b6d4;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
             text-transform: uppercase;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
         }
 
         .card-title {
-            margin: 0 0 10px 0;
-            font-size: 1.25rem;
-            color: var(--secondary-color);
+            margin: 0 0 12px 0;
+            font-size: 1.35rem;
+            color: #ffffff;
             font-weight: 600;
         }
 
@@ -141,129 +133,82 @@
             margin: 0;
             color: var(--text-muted);
             font-size: 0.95rem;
-            flex-grow: 1;
-        }
-
-        /* Small Card Style for 008-012 */
-        .small-card {
-            padding: 20px;
-            text-align: center;
-        }
-        
-        .small-card .icon {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            display: block;
+            font-weight: 300;
         }
 
         /* Footer */
         footer {
             text-align: center;
             padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
-            margin-top: 60px;
+            color: rgba(148, 163, 184, 0.5);
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         @media (max-width: 640px) {
-            header h1 { font-size: 1.8rem; }
-            main { margin: 20px auto; }
+            header h1 { font-size: 1.9rem; }
+            .grid-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="header-container">
-            <h1>การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ</h1>
-            <p>คลังบทเรียนออนไลน์ กิจกรรม และการประเมินผลการเรียนรู้</p>
-        </div>
+        <span class="badge">ห้องเรียนครูวิมมี่</span>
+        <h1>การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ</h1>
+        <p>คลังบทเรียนและสื่อการสอนออนไลน์สำหรับอนาคต</p>
     </header>
 
     <main>
-        
-        <h2 class="section-title">บทเรียนประจำรายวิชา (Course Modules)</h2>
         <div class="grid-container">
             
             <a href="001/index.html" class="card">
-                <div class="card-meta"><span>รหัส 001</span> <span>Module 1</span></div>
-                <h3 class="card-title">บทที่ 1: Digital Literacy & Citizenship</h3>
-                <p class="card-desc">การรู้เท่าทันสื่อดิจิทัล ทักษะความเข้าใจ และการเป็นพลเมืองดิจิทัลอย่างสร้างสรรค์และปลอดภัย</p>
+                <div class="card-number">Chapter 01</div>
+                <h3 class="card-title">Digital Literacy & Citizenship</h3>
+                <p class="card-desc">ทักษะความเข้าใจสื่อดิจิทัลและการปฏิบัติตนเป็นพลเมืองดิจิทัลอย่างชาญฉลาด ปลอดภัย และมีจริยธรรม</p>
             </a>
 
             <a href="002/index.html" class="card">
-                <div class="card-meta"><span>รหัส 002</span> <span>Module 2</span></div>
-                <h3 class="card-title">บทที่ 2: Digital Productivity Tools</h3>
-                <p class="card-desc">การใช้งานเครื่องมือและโปรแกรมดิจิทัลเพื่อเพิ่มประสิทธิภาพและผลิตภาพในการทำงานยุคใหม่</p>
+                <div class="card-number">Chapter 02</div>
+                <h3 class="card-title">Digital Productivity Tools</h3>
+                <p class="card-desc">เพิ่มประสิทธิภาพการทำงานในองค์กรด้วยเครื่องมือดิจิทัลและเทคโนโลยีซอฟต์แวร์ยุคใหม่</p>
             </a>
 
             <a href="003/index.html" class="card">
-                <div class="card-meta"><span>รหัส 003</span> <span>Module 3</span></div>
-                <h3 class="card-title">บทที่ 3: Cloud Collaboration</h3>
-                <p class="card-desc">การทำงานร่วมกันผ่านระบบคลาวด์ การบริหารจัดการไฟล์ และการสื่อสารในองค์กรแบบออนไลน์</p>
+                <div class="card-number">Chapter 03</div>
+                <h3 class="card-title">Cloud Collaboration</h3>
+                <p class="card-desc">การทำงานร่วมกันแบบไร้รอยต่อบนระบบคลาวด์ การแชร์ข้อมูล และการสื่อสารภายในทีมออนไลน์</p>
             </a>
 
             <a href="004/index.html" class="card">
-                <div class="card-meta"><span>รหัส 004</span> <span>Module 4</span></div>
-                <h3 class="card-title">บทที่ 4: Digital Content Creation</h3>
-                <p class="card-desc">ทักษะและการประยุกต์ใช้เครื่องมือในการสร้างสรรค์สื่อดิจิทัล คอนเทนต์ และอินโฟกราฟิกเพื่องานอาชีพ</p>
+                <div class="card-number">Chapter 04</div>
+                <h3 class="card-title">Digital Content Creation</h3>
+                <p class="card-desc">เทคนิคและเครื่องมือสร้างสรรค์คอนเทนต์ สื่อดิจิทัล และอินโฟกราฟิกเพื่อประยุกต์ใช้ในงานอาชีพ</p>
             </a>
 
             <a href="005/index.html" class="card">
-                <div class="card-meta"><span>รหัส 005</span> <span>Module 5</span></div>
-                <h3 class="card-title">บทที่ 5: Blockchain & Digital Finance</h3>
-                <p class="card-desc">ทำความเข้าใจเทคโนโลยีบล็อกเชน สินทรัพย์ดิจิทัล และระบบการเงินสมัยใหม่ในการทำงาน</p>
+                <div class="card-number">Chapter 05</div>
+                <h3 class="card-title">Blockchain & Digital Finance</h3>
+                <p class="card-desc">เจาะลึกเทคโนโลยีบล็อกเชน นวัตกรรมทางการเงิน สินทรัพย์ดิจิทัล และโอกาสในโลกธุรกิจ</p>
             </a>
 
             <a href="006/index.html" class="card">
-                <div class="card-meta"><span>รหัส 006</span> <span>Module 6</span></div>
-                <h3 class="card-title">บทที่ 6: AI in Professional Careers</h3>
-                <p class="card-desc">การนำระบบปัญญาประดิษฐ์ (AI Tools) มาประยุกต์ใช้เพื่อช่วยวางแผน วิเคราะห์ และยกระดับการทำงาน</p>
+                <div class="card-number">Chapter 06</div>
+                <h3 class="card-title">AI in Professional Careers</h3>
+                <p class="card-desc">ก้าวล้ำด้วยการนำปัญญาประดิษฐ์ (AI Tools) เข้ามาช่วยวิเคราะห์และทุ่นแรงในการทำงานจริง</p>
             </a>
 
             <a href="007/index.html" class="card">
-                <div class="card-meta"><span>รหัส 007</span> <span>Module 7</span></div>
-                <h3 class="card-title">บทที่ 7: Cyber Security</h3>
-                <p class="card-desc">ความมั่นคงปลอดภัยไซเบอร์ การรับมือกับภัยคุกคามออนไลน์ และการปกป้องข้อมูลส่วนบุคคลในวิชาชีพ</p>
+                <div class="card-number">Chapter 07</div>
+                <h3 class="card-title">Cyber Security</h3>
+                <p class="card-desc">แนวคิดความปลอดภัยทางไซเบอร์ การป้องกันภัยคุกคาม และการรักษาความปลอดภัยของข้อมูลวิชาชีพ</p>
             </a>
 
         </div>
-
-        <h2 class="section-title">การวัดผลและคลังกิจกรรม (Assessments & Projects)</h2>
-        <div class="sub-grid-container">
-            
-            <a href="008/index.html" class="card small-card">
-                <span class="icon">📝</span>
-                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">008: แบบทดสอบ</div>
-            </a>
-
-            <a href="009/index.html" class="card small-card">
-                <span class="icon">💼</span>
-                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">009: ชิ้นงานปฏิบัติ</div>
-            </a>
-
-            <a href="010/index.html" class="card small-card">
-                <span class="icon">🚀</span>
-                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">010: โปรเจกต์จบรายวิชา</div>
-            </a>
-
-            <a href="011/index.html" class="card small-card">
-                <span class="icon">📚</span>
-                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">011: แหล่งข้อมูลเสริม</div>
-            </a>
-
-            <a href="012/index.html" class="card small-card">
-                <span class="icon">📊</span>
-                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">012: เกณฑ์คะแนน</div>
-            </a>
-
-        </div>
-
     </main>
 
     <footer>
-        <p>© 2026 รายวิชา การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ | พัฒนาด้วย GitHub Pages</p>
+        <p>© 2026 ห้องเรียนครูวิมมี่ | รายวิชา การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ</p>
     </footer>
 
 </body>
