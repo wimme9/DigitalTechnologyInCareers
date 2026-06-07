@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บทที่ 1 – พื้นฐานเทคโนโลยีดิจิทัลและการเป็นพลเมืองดิจิทัล</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --card: #141c2e;
+    --border: rgba(99,179,237,0.15);
+    --accent1: #38bdf8;
+    --accent2: #818cf8;
+    --accent3: #34d399;
+    --accent4: #fb923c;
+    --accent5: #f472b6;
+    --accent6: #facc15;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --heading: #f8fafc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+    padding: 0;
+  }
+
+  /* ===== HERO HEADER ===== */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 56px 40px 48px;
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f1e3a 50%, #0a1628 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(56,189,248,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(129,140,248,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent1);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .hero h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  .chapter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent1);
+    margin-bottom: 20px;
+  }
+  .chapter-badge .dot {
+    width: 6px; height: 6px;
+    background: var(--accent1);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ===== CONTENT ===== */
+  .content {
+    padding: 0 40px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ===== SECTION CARDS ===== */
+  .section-block {
+    margin-top: 36px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card);
+    position: relative;
+  }
+  .section-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .section-block.c1::before { background: linear-gradient(90deg, var(--accent1), #7dd3fc); }
+  .section-block.c2::before { background: linear-gradient(90deg, var(--accent2), #c4b5fd); }
+  .section-block.c3::before { background: linear-gradient(90deg, var(--accent3), #6ee7b7); }
+  .section-block.c4::before { background: linear-gradient(90deg, var(--accent4), #fdba74); }
+  .section-block.c5::before { background: linear-gradient(90deg, var(--accent5), #f9a8d4); }
+  .section-block.c6::before { background: linear-gradient(90deg, var(--accent6), #fde047); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .c1 .section-icon { background: rgba(56,189,248,0.15); }
+  .c2 .section-icon { background: rgba(129,140,248,0.15); }
+  .c3 .section-icon { background: rgba(52,211,153,0.15); }
+  .c4 .section-icon { background: rgba(251,146,60,0.15); }
+  .c5 .section-icon { background: rgba(244,114,182,0.15); }
+  .c6 .section-icon { background: rgba(250,204,21,0.15); }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+  .c1 .section-num { color: var(--accent1); }
+  .c2 .section-num { color: var(--accent2); }
+  .c3 .section-num { color: var(--accent3); }
+  .c4 .section-num { color: var(--accent4); }
+  .c5 .section-num { color: var(--accent5); }
+  .c6 .section-num { color: var(--accent6); }
+
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--heading);
+    line-height: 1.3;
+  }
+  .section-body { padding: 20px 24px 24px; }
+
+  /* ===== TYPOGRAPHY WITHIN SECTIONS ===== */
+  .lead {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    line-height: 1.9;
+    border-left: 3px solid rgba(255,255,255,0.08);
+    padding-left: 14px;
+  }
+  h3.sub {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 18px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3.sub::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 14px;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .c1 h3.sub { color: var(--accent1); }
+  .c2 h3.sub { color: var(--accent2); }
+  .c3 h3.sub { color: var(--accent3); }
+  .c4 h3.sub { color: var(--accent4); }
+  .c5 h3.sub { color: var(--accent5); }
+  .c6 h3.sub { color: var(--accent6); }
+
+  /* ===== GRID CARDS ===== */
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .mini-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .mini-card .mc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 5px;
+  }
+  .mini-card p {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ===== PILL LIST ===== */
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .c1 .pill { background: rgba(56,189,248,0.12); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.2); }
+  .c2 .pill { background: rgba(129,140,248,0.12); color: #c4b5fd; border: 1px solid rgba(129,140,248,0.2); }
+  .c3 .pill { background: rgba(52,211,153,0.12); color: #6ee7b7; border: 1px solid rgba(52,211,153,0.2); }
+  .c4 .pill { background: rgba(251,146,60,0.12); color: #fdba74; border: 1px solid rgba(251,146,60,0.2); }
+  .c5 .pill { background: rgba(244,114,182,0.12); color: #f9a8d4; border: 1px solid rgba(244,114,182,0.2); }
+  .c6 .pill { background: rgba(250,204,21,0.12); color: #fde047; border: 1px solid rgba(250,204,21,0.2); }
+
+  /* ===== NUMBERED LIST ===== */
+  .num-list { list-style: none; margin-top: 10px; }
+  .num-list li {
+    display: flex; gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .num-list li .n {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 1px;
+  }
+  .c1 .num-list li .n { background: rgba(56,189,248,0.15); color: var(--accent1); }
+  .c2 .num-list li .n { background: rgba(129,140,248,0.15); color: var(--accent2); }
+  .c3 .num-list li .n { background: rgba(52,211,153,0.15); color: var(--accent3); }
+  .c4 .num-list li .n { background: rgba(251,146,60,0.15); color: var(--accent4); }
+  .c5 .num-list li .n { background: rgba(244,114,182,0.15); color: var(--accent5); }
+  .c6 .num-list li .n { background: rgba(250,204,21,0.15); color: var(--accent6); }
+
+  /* ===== HIGHLIGHT BOX ===== */
+  .highlight-box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .c1 .highlight-box { background: rgba(56,189,248,0.07); border-left: 3px solid var(--accent1); }
+  .c2 .highlight-box { background: rgba(129,140,248,0.07); border-left: 3px solid var(--accent2); }
+  .c3 .highlight-box { background: rgba(52,211,153,0.07); border-left: 3px solid var(--accent3); }
+  .c4 .highlight-box { background: rgba(251,146,60,0.07); border-left: 3px solid var(--accent4); }
+  .c5 .highlight-box { background: rgba(244,114,182,0.07); border-left: 3px solid var(--accent5); }
+  .c6 .highlight-box { background: rgba(250,204,21,0.07); border-left: 3px solid var(--accent6); }
+  .highlight-box strong { font-weight: 700; }
+
+  /* ===== 2-COL LAYOUT ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .mini-grid { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 22px; }
+    .content { padding: 0 20px 40px; }
+    .hero { padding: 40px 20px 36px; }
+  }
+
+  .col-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .col-box .cb-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .c3 .col-box .cb-title { color: var(--accent3); }
+  .c4 .col-box .cb-title { color: var(--accent4); }
+  .c5 .col-box .cb-title { color: var(--accent5); }
+  .c6 .col-box .cb-title { color: var(--accent6); }
+
+  .col-box ul { list-style: none; }
+  .col-box ul li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 3px 0;
+    display: flex; gap: 8px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+  .col-box ul li::before {
+    content: '›';
+    font-size: 14px;
+    opacity: 0.5;
+    flex-shrink: 0;
+    margin-top: -1px;
+  }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .data-table th {
+    text-align: left;
+    padding: 9px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .tag-law {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(250,204,21,0.12);
+    color: #fde047;
+    border: 1px solid rgba(250,204,21,0.2);
+  }
+
+  /* ===== ACTION BUTTON (FORMS LINK) ===== */
+  .action-wrapper {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .btn-quiz {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .btn-quiz:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(6, 182, 212, 0.4);
+    background: linear-gradient(135deg, #4338ca 0%, #0891b2 100%);
+  }
+  .btn-quiz .icon-arrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+  }
+  .btn-quiz:hover .icon-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ===== SUMMARY ===== */
+  .summary-bar {
+    margin-top: 30px;
+    background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(129,140,248,0.08));
+    border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .summary-bar .sb-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent1);
+    margin-bottom: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .summary-bar p {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.7;
+  }
+  .stat-row {
+    display: flex; gap: 24px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat .val {
+    font-size: 28px;
+    font-weight: 800;
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent1), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat .lbl {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    text-align: center;
+    padding: 28px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.5px;
+  }
+
+  strong { font-weight: 700; }
+  em { font-style: normal; color: var(--heading); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="chapter-badge">
+    <span class="dot"></span>
+    CHAPTER 01 · ใบความรู้
+  </div>
+  <div class="hero-meta">วิชาเทคโนโลยีสารสนเทศ &nbsp;|&nbsp; Digital Technology</div>
+  <h1>พื้นฐานเทคโนโลยีดิจิทัล<br>และการเป็น<span>พลเมืองดิจิทัล</span></h1>
+  <div class="hero-sub">Digital Literacy &amp; Digital Citizenship</div>
+</div>
+
+<div class="content">
+
+  <div class="section-block c1">
+    <div class="section-header">
+      <div class="section-icon">💻</div>
+      <div>
+        <div class="section-num">TOPIC 01</div>
+        <div class="section-title">ความรู้พื้นฐานเกี่ยวกับเทคโนโลยีดิจิทัล คอมพิวเตอร์ และเครือข่ายอินเทอร์เน็ต</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">เทคโนโลยีดิจิทัล คือ การนำข้อมูลมาแปลงเป็นรหัสดิจิทัล (0 และ 1) เพื่อประมวลผล จัดเก็บ และส่งต่อผ่านอุปกรณ์อิเล็กทรอนิกส์ ประกอบด้วย 3 องค์ประกอบหลัก</p>
+
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mc-title">🖥 ฮาร์ดแวร์ (Hardware)</div>
+          <p>ส่วนประกอบทางกายภาพ เช่น CPU, RAM, HDD/SSD, จอภาพ, แป้นพิมพ์ อุปกรณ์ I/O ต่าง ๆ</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">⚙️ ซอฟต์แวร์ (Software)</div>
+          <p>โปรแกรมและระบบปฏิบัติการ แบ่งเป็น System Software (Windows, macOS, Linux) และ Application Software</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">🌐 เครือข่าย (Network)</div>
+          <p>การเชื่อมต่ออุปกรณ์หลายเครื่องเข้าด้วยกัน เช่น LAN, WAN, อินเทอร์เน็ต ผ่านโปรโตคอล TCP/IP</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">☁️ คลาวด์ (Cloud)</div>
+          <p>การจัดเก็บและประมวลผลข้อมูลผ่านอินเทอร์เน็ต เช่น Google Drive, iCloud, OneDrive</p>
+        </div>
+      </div>
+
+      <h3 class="sub">ประเภทของเครือข่ายอินเทอร์เน็ต</h3>
+      <div class="pill-list">
+        <span class="pill">🔗 LAN – เครือข่ายท้องถิ่น</span>
+        <span class="pill">🌍 WAN – เครือข่ายพื้นที่กว้าง</span>
+        <span class="pill">📶 Wi-Fi – ไร้สาย</span>
+        <span class="pill">📡 4G/5G – มือถือ</span>
+        <span class="pill">🔒 VPN – เครือข่ายส่วนตัว</span>
+        <span class="pill">🌐 Internet – เครือข่ายสากล</span>
+      </div>
+
+      <div class="highlight-box">
+        <strong>💡 รู้หรือไม่?</strong> อินเทอร์เน็ตทำงานโดยใช้โปรโตคอล TCP/IP ซึ่งแบ่งข้อมูลออกเป็น <em>Packets</em> ส่งผ่านเส้นทางต่าง ๆ แล้วประกอบรวมกันใหม่ที่ปลายทาง ทำให้การส่งข้อมูลมีความเสถียรและรวดเร็ว
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block c2">
+    <div class="section-header">
+      <div class="section-icon">📱</div>
+      <div>
+        <div class="section-num">TOPIC 02</div>
+        <div class="section-title">การใช้งานเทคโนโลยีดิจิทัลในชีวิตประจำวันและการประกอบอาชีพ</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">เทคโนโลยีดิจิทัลเข้ามามีบทบาทในทุกมิติของชีวิต ตั้งแต่การสื่อสาร การเรียนรู้ ไปจนถึงการประกอบอาชีพและธุรกิจในยุคเศรษฐกิจดิจิทัล</p>
+
+      <h3 class="sub">ด้านชีวิตประจำวัน</h3>
+      <ul class="num-list">
+        <li><span class="n">1</span><span><strong>การสื่อสาร</strong> – Line, Facebook, Instagram, Email, Video Call (Zoom, Meet)</span></li>
+        <li><span class="n">2</span><span><strong>การซื้อขายออนไลน์</strong> – Shopee, Lazada, TikTok Shop, การชำระเงินผ่าน PromptPay</span></li>
+        <li><span class="n">3</span><span><strong>บริการภาครัฐ</strong> – e-Government, ยื่นภาษีออนไลน์, ทะเบียนราษฎร์ดิจิทัล</span></li>
+        <li><span class="n">4</span><span><strong>ความบันเทิงและสุขภาพ</strong> – Streaming, แอปออกกำลังกาย, การนัดหมองแพทย์ออนไลน์</span></li>
+      </ul>
+
+      <h3 class="sub">ด้านการประกอบอาชีพ</h3>
+      <ul class="num-list">
+        <li><span class="n">1</span><span><strong>Freelance & Remote Work</strong> – ทำงานจากที่บ้านผ่านแพลตฟอร์มดิจิทัล</span></li>
+        <li><span class="n">2</span><span><strong>E-Commerce</strong> – เปิดร้านค้าออนไลน์ ขายสินค้าได้ทั่วโลก</span></li>
+        <li><span class="n">3</span><span><strong>Content Creator</strong> – YouTuber, Blogger, Influencer สร้างรายได้จากคอนเทนต์</span></li>
+        <li><span class="n">4</span><span><strong>Digital Marketing</strong> – SEO, Social Media Marketing, Email Marketing</span></li>
+        <li><span class="n">5</span><span><strong>IT Professional</strong> – Programmer, Data Scientist, Cybersecurity Expert</span></li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong>🎯 ทักษะดิจิทัลที่นายจ้างต้องการ:</strong> Microsoft Office Suite, การใช้ Google Workspace, ทักษะการนำเสนอดิจิทัล, การวิเคราะห์ข้อมูลเบื้องต้น, และความเข้าใจด้านความปลอดภัยทางไซเบอร์
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block c3">
+    <div class="section-header">
+      <div class="section-icon">🏛️</div>
+      <div>
+        <div class="section-num">TOPIC 03</div>
+        <div class="section-title">การเป็นพลเมืองดิจิทัล (Digital Citizenship) อย่างมีคุณภาพ</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">พลเมืองดิจิทัลที่ดี คือ ผู้ที่ใช้เทคโนโลยีอย่างมีความรับผิดชอบ ปลอดภัย มีจริยธรรม และเคารพสิทธิของผู้อื่นในโลกออนไลน์ ประกอบด้วย 9 องค์ประกอบสำคัญ</p>
+
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mc-title">1. Digital Access</div>
+          <p>การเข้าถึงเทคโนโลยีอย่างเท่าเทียม ลดช่องว่างดิจิทัล</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">2. Digital Commerce</div>
+          <p>การซื้อขายออนไลน์อย่างถูกกฎหมายและปลอดภัย</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">3. Digital Communication</div>
+          <p>การสื่อสารออนไลน์อย่างเหมาะสม ตรงประเด็น สุภาพ</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">4. Digital Literacy</div>
+          <p>ทักษะการใช้ดิจิทัล วิเคราะห์ข้อมูล แยกแยะข้อเท็จจริง</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">5. Digital Etiquette</div>
+          <p>มารยาทในโลกออนไลน์ ไม่รบกวนผู้อื่น</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">6. Digital Law</div>
+          <p>รู้กฎหมายดิจิทัล ไม่ละเมิดสิทธิ์ ไม่กระทำผิด</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">7. Digital Rights & Responsibility</div>
+          <p>สิทธิ์ในการแสดงออกและความรับผิดชอบต่อสังคม</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">8. Digital Health & Wellness</div>
+          <p>ดูแลสุขภาพกาย-ใจ ไม่ติดเทคโนโลยีมากเกินไป</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">9. Digital Security</div>
+          <p>ปกป้องข้อมูลส่วนตัว รหัสผ่านแข็งแกร่ง ระวังภัยไซเบอร์</p>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>✅ คุณสมบัติพลเมืองดิจิทัลที่ดี:</strong> คิดก่อนโพสต์ · ตรวจสอบข้อมูลก่อนแชร์ · เคารพความเป็นส่วนตัวของผู้อื่น · ไม่ส่งต่อข่าวปลอม (Fake News) · ใช้เวลาหน้าจออย่างสมดุล
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block c4">
+    <div class="section-header">
+      <div class="section-icon">👣</div>
+      <div>
+        <div class="section-num">TOPIC 04</div>
+        <div class="section-title">ร่องรอยทางดิจิทัล (Digital Footprint) และภาพลักษณ์บนโลกออนไลน์</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">ทุกครั้งที่เราใช้งานอินเทอร์เน็ต เราจะทิ้งร่องรอยข้อมูลไว้เสมอ สิ่งเหล่านี้รวมกันเป็น "ภาพลักษณ์ดิจิทัล" ที่คนอื่นมองเห็น และส่งผลต่อโอกาสในชีวิตจริง</p>
+
+      <div class="two-col">
+        <div class="col-box">
+          <div class="cb-title">🟢 Active Digital Footprint (ตั้งใจสร้าง)</div>
+          <ul>
+            <li>โพสต์บน Social Media</li>
+            <li>ความคิดเห็นในเว็บต่าง ๆ</li>
+            <li>รูปภาพที่อัปโหลด</li>
+            <li>การลงทะเบียนสมัครสมาชิก</li>
+            <li>บทความที่เขียนออนไลน์</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="cb-title">🟡 Passive Digital Footprint (ไม่ได้ตั้งใจ)</div>
+          <ul>
+            <li>ประวัติการค้นหา Google</li>
+            <li>Cookies และการติดตาม</li>
+            <li>ตำแหน่ง GPS ที่บันทึก</li>
+            <li>IP Address ที่ใช้งาน</li>
+            <li>ข้อมูลการชำระเงินออนไลน์</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">การสร้างภาพลักษณ์ออนไลน์ที่ดี</h3>
+      <ul class="num-list">
+        <li><span class="n">1</span><span><strong>Google ตัวเอง</strong> เป็นประจำ เพื่อดูว่าคนอื่นมองเห็นอะไรเกี่ยวกับเรา</span></li>
+        <li><span class="n">2</span><span><strong>ตั้งค่าความเป็นส่วนตัว</strong> ของบัญชี Social Media อย่างระมัดระวัง</span></li>
+        <li><span class="n">3</span><span><strong>คิดก่อนโพสต์</strong> — เนื้อหาที่เผยแพร่ออกไปแล้วยากที่จะลบออกจากอินเทอร์เน็ต</span></li>
+        <li><span class="n">4</span><span><strong>สร้าง Personal Brand</strong> เชิงบวก แสดงผลงาน ทักษะ และคุณค่าที่ต้องการนำเสนอ</span></li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong>⚠️ ระวัง!</strong> นายจ้าง 70% ตรวจสอบโปรไฟล์โซเชียลมีเดียของผู้สมัครงาน และสถาบันการศึกษาหลายแห่งก็ทำเช่นเดียวกัน ภาพลักษณ์ดิจิทัลของคุณคือ "ประวัติออนไลน์" ที่ติดตัวตลอดไป
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block c5">
+    <div class="section-header">
+      <div class="section-icon">⚖️</div>
+      <div>
+        <div class="section-num">TOPIC 05</div>
+        <div class="section-title">คุณธรรม จริยธรรม และความรับผิดชอบในการใช้เทคโนโลยีดิจิทัล</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">จริยธรรมดิจิทัล (Digital Ethics) คือหลักการและมาตรฐานทางศีลธรรมที่ควรยึดถือในการใช้เทคโนโลยี เพื่อให้การอยู่ร่วมกันในสังคมออนไลน์เป็นไปอย่างสงบสุข</p>
+
+      <h3 class="sub">หลักจริยธรรมดิจิทัล 5 ประการ</h3>
+      <ul class="num-list">
+        <li><span class="n">1</span><span><strong>ความซื่อสัตย์ (Honesty)</strong> – ไม่โกหก ไม่หลอกลวง ไม่สร้างตัวตนปลอมออนไลน์ ไม่ Catfish</span></li>
+        <li><span class="n">2</span><span><strong>การเคารพสิทธิ์ (Respect)</strong> – เคารพสิทธิ์ข้อมูลส่วนตัว ลิขสิทธิ์ และความเป็นส่วนตัวของผู้อื่น</span></li>
+        <li><span class="n">3</span><span><strong>ความรับผิดชอบ (Responsibility)</strong> – รับผิดชอบต่อเนื้อหาที่โพสต์ ไม่โยนความผิดให้ผู้อื่น</span></li>
+        <li><span class="n">4</span><span><strong>ความยุติธรรม (Fairness)</strong> – ไม่เลือกปฏิบัติ ไม่กลั่นแกล้งออนไลน์ (Cyberbullying)</span></li>
+        <li><span class="n">5</span><span><strong>ประโยชน์ต่อสังคม (Beneficence)</strong> – ใช้เทคโนโลยีเพื่อสร้างสรรค์ ไม่ทำลาย</span></li>
+      </ul>
+
+      <h3 class="sub">พฤติกรรมที่ควรหลีกเลี่ยง</h3>
+      <div class="pill-list">
+        <span class="pill">❌ Cyberbullying – กลั่นแกล้งออนไลน์</span>
+        <span class="pill">❌ Fake News – แชร์ข่าวปลอม</span>
+        <span class="pill">❌ Trolling – ยั่วยุผู้อื่น</span>
+        <span class="pill">❌ Doxxing – เปิดเผยข้อมูลส่วนตัว</span>
+        <span class="pill">❌ Phishing – หลอกขโมยข้อมูล</span>
+        <span class="pill">❌ Plagiarism – ขโมยผลงาน</span>
+        <span class="pill">❌ Hate Speech – พูดจาสสร้างความเกลียดชัง</span>
+      </div>
+
+      <div class="highlight-box">
+        <strong>🤔 หลักคิด "THINK" ก่อนโพสต์:</strong><br>
+        <strong>T</strong>rue – เป็นความจริงหรือไม่? &nbsp;·&nbsp;
+        <strong>H</strong>elpful – เป็นประโยชน์หรือไม่? &nbsp;·&nbsp;
+        <strong>I</strong>nspiring – สร้างแรงบันดาลใจหรือไม่? &nbsp;·&nbsp;
+        <strong>N</strong>ecessary – จำเป็นต้องโพสต์หรือไม่? &nbsp;·&nbsp;
+        <strong>K</strong>ind – สุภาพและเมตตาหรือไม่?
+      </div>
+    </div>
+  </div>
+
+  <div class="section-block c6">
+    <div class="section-header">
+      <div class="section-icon">📜</div>
+      <div>
+        <div class="section-num">TOPIC 06</div>
+        <div class="section-title">กฎหมายที่เกี่ยวข้องและมารยาทในการใช้สื่อสังคมออนไลน์</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">ประเทศไทยมีกฎหมายดิจิทัลหลายฉบับที่ควรรู้จักเพื่อป้องกันตนเองจากการกระทำผิดโดยไม่ตั้งใจ และเพื่อปกป้องสิทธิ์ของตนเอง</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>กฎหมาย</th>
+            <th>สาระสำคัญ</th>
+            <th>โทษสูงสุด</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag-law">พ.ร.บ. คอมพิวเตอร์ 2550/2560</span></td>
+            <td>ห้ามเข้าถึงระบบโดยมิชอบ ส่งข้อมูลเท็จ หลอกลวง หมิ่นประมาท ผิดศีลธรรม</td>
+            <td>จำคุก 5 ปี / ปรับ 100,000 บาท</td>
+          </tr>
+          <tr>
+            <td><span class="tag-law">พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA) 2562</span></td>
+            <td>ปกป้องข้อมูลส่วนบุคคล ต้องได้รับความยินยอมก่อนเก็บรวบรวมข้อมูล</td>
+            <td>จำคุก 1 ปี / ปรับ 1,000,000 บาท</td>
+          </tr>
+          <tr>
+            <td><span class="tag-law">ประมวลกฎหมายอาญา ม.326-328</span></td>
+            <td>ความผิดฐานหมิ่นประมาทบุคคลอื่น รวมถึงการกระทำผ่านสื่อออนไลน์</td>
+            <td>จำคุก 2 ปี / ปรับ 200,000 บาท</td>
+          </tr>
+          <tr>
+            <td><span class="tag-law">พ.ร.บ. ลิขสิทธิ์ 2537</span></td>
+            <td>ห้ามนำผลงานผู้อื่นไปใช้โดยไม่ได้รับอนุญาต รวมถึงรูปภาพ เพลง วิดีโอ</td>
+            <td>จำคุก 4 ปี / ปรับ 800,000 บาท</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="sub">มารยาทในการใช้สื่อสังคมออนไลน์ (Netiquette)</h3>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="cb-title">✅ ควรทำ</div>
+          <ul>
+            <li>ใช้ภาษาสุภาพ เหมาะสมกับบริบท</li>
+            <li>ขอบคุณและให้เครดิตแหล่งที่มา</li>
+            <li>ตอบกลับอย่างสร้างสรรค์</li>
+            <li>อ่านให้เข้าใจก่อน Comment</li>
+            <li>แจ้งเตือนเนื้อหาที่เป็นอันตราย</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="cb-title">❌ ไม่ควรทำ</div>
+          <ul>
+            <li>เขียนด้วยตัวพิมพ์ใหญ่ทั้งหมด (รู้สึกตะโกน)</li>
+            <li>แชร์ข่าวโดยไม่ตรวจสอบ</li>
+            <li>Tag ผู้อื่นโดยไม่ได้รับอนุญาต</li>
+            <li>ส่ง Spam หรือข้อความซ้ำ ๆ</li>
+            <li>ดราม่าและโจมตีส่วนตัว</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-wrapper">
+    <a href="https://forms.gle/RLpsGHPuqskBM6i39" target="_blank" class="btn-quiz">
+      <span>📝 คลิกเพื่อทำแบบฝึกหัดประจำบท</span>
+      <span class="icon-arrow">-&gt;</span>
+    </a>
+  </div>
+
+  <div class="summary-bar">
+    <div>
+      <div class="sb-title">// Summary</div>
+      <p>บทที่ 1 ครอบคลุมพื้นฐานที่สำคัญสำหรับการใช้ชีวิตในยุคดิจิทัล ตั้งแต่ความรู้ด้านเทคโนโลยี การเป็นพลเมืองดิจิทัลที่มีคุณภาพ ไปจนถึงกฎหมายและจริยธรรมที่ต้องยึดถือ</p>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="val">6</div>
+        <div class="lbl">หัวข้อหลัก</div>
+      </div>
+      <div class="stat">
+        <div class="val">9</div>
+        <div class="lbl">องค์ประกอบ<br>พลเมืองดิจิทัล</div>
+      </div>
+      <div class="stat">
+        <div class="val">4</div>
+        <div class="lbl">กฎหมาย<br>ที่ควรรู้</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  ห้องเรียนครูวิมมี่ วิชาการประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ
+</div>
+
+</body>
+</html>
