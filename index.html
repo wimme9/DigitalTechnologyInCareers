@@ -3,69 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สารบัญ</title>
+    <title>การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ</title>
     <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #0f172a;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
+            font-family: 'ChulaCharasNew', 'Sarabun', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 0;
+            line-height: 1.6;
         }
-        h1 {
-            color: #2c3e50;
-            margin-bottom: 30px;
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #1e3a8a 100%);
+            color: white;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
+
+        .header-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            margin: 0;
+            color: #93c5fd;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 12px;
+            margin-bottom: 25px;
+            margin-top: 40px;
+        }
+
+        /* Course Grid */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        /* Assignment Grid for 008-012 */
+        .sub-grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 20px;
-            width: 100%;
-            max-width: 800px;
         }
-        .folder-card {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-decoration: none;
-            color: #2c3e50;
-            font-weight: bold;
-            font-size: 1.2rem;
+
+        /* Card Styles */
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             border: 1px solid #e2e8f0;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
-        .folder-card:hover {
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-            background-color: #3498db;
-            color: white;
-            border-color: #3498db;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #bfdbfe;
         }
-        .icon {
-            font-size: 2rem;
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-meta {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
             margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            margin: 0 0 10px 0;
+            font-size: 1.25rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .card-desc {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        /* Small Card Style for 008-012 */
+        .small-card {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .small-card .icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             display: block;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 640px) {
+            header h1 { font-size: 1.8rem; }
+            main { margin: 20px auto; }
         }
     </style>
 </head>
 <body>
 
-    <h1>🗂️ รายการบทเรียน</h1>
+    <header>
+        <div class="header-container">
+            <h1>การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ</h1>
+            <p>คลังบทเรียนออนไลน์ กิจกรรม และการประเมินผลการเรียนรู้</p>
+        </div>
+    </header>
 
-    <div class="grid-container">
-        <a href="001/index.html" class="folder-card"><span class="icon">📁</span> บทที่ 1</a>
-        <a href="002/index.html" class="folder-card"><span class="icon">📁</span> บทที่ 2</a>
-        <a href="003/index.html" class="folder-card"><span class="icon">📁</span> บทที่ 3</a>
-        <a href="004/index.html" class="folder-card"><span class="icon">📁</span> บทที่ 4</a>
-        <a href="005/index.html" class="folder-card"><span class="icon">📁</span> บทที่ 5</a>
-        <a href="006/index.html" class="folder-card"><span class="icon">📁</span> บทที่ 6</a>
-        <a href="007/index.html" class="folder-card"><span class="icon">📁</span> บทที่ 7</a>
-    </div>
+    <main>
+        
+        <h2 class="section-title">บทเรียนประจำรายวิชา (Course Modules)</h2>
+        <div class="grid-container">
+            
+            <a href="001/index.html" class="card">
+                <div class="card-meta"><span>รหัส 001</span> <span>Module 1</span></div>
+                <h3 class="card-title">บทที่ 1: Digital Literacy & Citizenship</h3>
+                <p class="card-desc">การรู้เท่าทันสื่อดิจิทัล ทักษะความเข้าใจ และการเป็นพลเมืองดิจิทัลอย่างสร้างสรรค์และปลอดภัย</p>
+            </a>
+
+            <a href="002/index.html" class="card">
+                <div class="card-meta"><span>รหัส 002</span> <span>Module 2</span></div>
+                <h3 class="card-title">บทที่ 2: Digital Productivity Tools</h3>
+                <p class="card-desc">การใช้งานเครื่องมือและโปรแกรมดิจิทัลเพื่อเพิ่มประสิทธิภาพและผลิตภาพในการทำงานยุคใหม่</p>
+            </a>
+
+            <a href="003/index.html" class="card">
+                <div class="card-meta"><span>รหัส 003</span> <span>Module 3</span></div>
+                <h3 class="card-title">บทที่ 3: Cloud Collaboration</h3>
+                <p class="card-desc">การทำงานร่วมกันผ่านระบบคลาวด์ การบริหารจัดการไฟล์ และการสื่อสารในองค์กรแบบออนไลน์</p>
+            </a>
+
+            <a href="004/index.html" class="card">
+                <div class="card-meta"><span>รหัส 004</span> <span>Module 4</span></div>
+                <h3 class="card-title">บทที่ 4: Digital Content Creation</h3>
+                <p class="card-desc">ทักษะและการประยุกต์ใช้เครื่องมือในการสร้างสรรค์สื่อดิจิทัล คอนเทนต์ และอินโฟกราฟิกเพื่องานอาชีพ</p>
+            </a>
+
+            <a href="005/index.html" class="card">
+                <div class="card-meta"><span>รหัส 005</span> <span>Module 5</span></div>
+                <h3 class="card-title">บทที่ 5: Blockchain & Digital Finance</h3>
+                <p class="card-desc">ทำความเข้าใจเทคโนโลยีบล็อกเชน สินทรัพย์ดิจิทัล และระบบการเงินสมัยใหม่ในการทำงาน</p>
+            </a>
+
+            <a href="006/index.html" class="card">
+                <div class="card-meta"><span>รหัส 006</span> <span>Module 6</span></div>
+                <h3 class="card-title">บทที่ 6: AI in Professional Careers</h3>
+                <p class="card-desc">การนำระบบปัญญาประดิษฐ์ (AI Tools) มาประยุกต์ใช้เพื่อช่วยวางแผน วิเคราะห์ และยกระดับการทำงาน</p>
+            </a>
+
+            <a href="007/index.html" class="card">
+                <div class="card-meta"><span>รหัส 007</span> <span>Module 7</span></div>
+                <h3 class="card-title">บทที่ 7: Cyber Security</h3>
+                <p class="card-desc">ความมั่นคงปลอดภัยไซเบอร์ การรับมือกับภัยคุกคามออนไลน์ และการปกป้องข้อมูลส่วนบุคคลในวิชาชีพ</p>
+            </a>
+
+        </div>
+
+        <h2 class="section-title">การวัดผลและคลังกิจกรรม (Assessments & Projects)</h2>
+        <div class="sub-grid-container">
+            
+            <a href="008/index.html" class="card small-card">
+                <span class="icon">📝</span>
+                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">008: แบบทดสอบ</div>
+            </a>
+
+            <a href="009/index.html" class="card small-card">
+                <span class="icon">💼</span>
+                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">009: ชิ้นงานปฏิบัติ</div>
+            </a>
+
+            <a href="010/index.html" class="card small-card">
+                <span class="icon">🚀</span>
+                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">010: โปรเจกต์จบรายวิชา</div>
+            </a>
+
+            <a href="011/index.html" class="card small-card">
+                <span class="icon">📚</span>
+                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">011: แหล่งข้อมูลเสริม</div>
+            </a>
+
+            <a href="012/index.html" class="card small-card">
+                <span class="icon">📊</span>
+                <div class="card-title" style="font-size: 1.1rem; margin-bottom: 0;">012: เกณฑ์คะแนน</div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2026 รายวิชา การประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ | พัฒนาด้วย GitHub Pages</p>
+    </footer>
 
 </body>
 </html>
