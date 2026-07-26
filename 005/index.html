@@ -1,1 +1,664 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บทที่ 5 – เทคโนโลยีบล็อกเชนและโลกการเงินดิจิทัล</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --card: #141c2e;
+    --border: rgba(99,179,237,0.15);
+    --accent1: #38bdf8;
+    --accent2: #818cf8;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --heading: #f8fafc;
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 56px 40px 48px;
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f1e3a 50%, #0a1628 100%);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(56,189,248,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(52,211,153,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(56,189,248,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(56,189,248,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent1);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+  .hero h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--accent1), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  .chapter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent1);
+    margin-bottom: 20px;
+  }
+  .chapter-badge .dot {
+    width: 6px; height: 6px;
+    background: var(--accent1);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ===== CONTENT ===== */
+  .content {
+    padding: 0 40px 60px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .section-block {
+    margin-top: 36px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card);
+    position: relative;
+  }
+  .section-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .section-block.c1::before { background: linear-gradient(90deg, var(--accent1), #7dd3fc); }
+  .section-block.c2::before { background: linear-gradient(90deg, var(--accent2), #c4b5fd); }
+  .section-block.c3::before { background: linear-gradient(90deg, var(--accent3), #6ee7b7); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon {
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .c1 .section-icon { background: rgba(56,189,248,0.15); }
+  .c2 .section-icon { background: rgba(129,140,248,0.15); }
+  .c3 .section-icon { background: rgba(52,211,153,0.15); }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+  .c1 .section-num { color: var(--accent1); }
+  .c2 .section-num { color: var(--accent2); }
+  .c3 .section-num { color: var(--accent3); }
+
+  .section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--heading);
+    line-height: 1.3;
+  }
+  .section-body { padding: 20px 24px 24px; }
+
+  .lead {
+    font-size: 14.5px;
+    color: var(--muted);
+    margin-bottom: 18px;
+    line-height: 1.9;
+    border-left: 3px solid rgba(255,255,255,0.08);
+    padding-left: 14px;
+  }
+  h3.sub {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 18px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h3.sub::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 14px;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .c1 h3.sub { color: var(--accent1); }
+  .c2 h3.sub { color: var(--accent2); }
+  .c3 h3.sub { color: var(--accent3); }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .mini-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .mini-card .mc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 5px;
+  }
+  .mini-card p {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .pill {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .c1 .pill { background: rgba(56,189,248,0.12); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.2); }
+  .c2 .pill { background: rgba(129,140,248,0.12); color: #c4b5fd; border: 1px solid rgba(129,140,248,0.2); }
+  .c3 .pill { background: rgba(52,211,153,0.12); color: #6ee7b7; border: 1px solid rgba(52,211,153,0.2); }
+
+  .num-list { list-style: none; margin-top: 10px; }
+  .num-list li {
+    display: flex; gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .num-list li .n {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 1px;
+  }
+  .c1 .num-list li .n { background: rgba(56,189,248,0.15); color: var(--accent1); }
+  .c2 .num-list li .n { background: rgba(129,140,248,0.15); color: var(--accent2); }
+  .c3 .num-list li .n { background: rgba(52,211,153,0.15); color: var(--accent3); }
+
+  .highlight-box {
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .c1 .highlight-box { background: rgba(56,189,248,0.07); border-left: 3px solid var(--accent1); }
+  .c2 .highlight-box { background: rgba(129,140,248,0.07); border-left: 3px solid var(--accent2); }
+  .c3 .highlight-box { background: rgba(52,211,153,0.07); border-left: 3px solid var(--accent3); }
+  .highlight-box strong { font-weight: 700; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 14px;
+  }
+  @media (max-width: 600px) {
+    .two-col { grid-template-columns: 1fr; }
+    .mini-grid { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 22px; }
+    .content { padding: 0 20px 40px; }
+    .hero { padding: 40px 20px 36px; }
+  }
+
+  .col-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .col-box .cb-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .c1 .col-box .cb-title { color: var(--accent1); }
+  .c2 .col-box .cb-title { color: var(--accent2); }
+  .c3 .col-box .cb-title { color: var(--accent3); }
+
+  .col-box ul { list-style: none; }
+  .col-box ul li {
+    font-size: 13px;
+    color: var(--text);
+    padding: 3px 0;
+    display: flex; gap: 8px;
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+  .col-box ul li::before {
+    content: '›';
+    font-size: 14px;
+    opacity: 0.5;
+    flex-shrink: 0;
+    margin-top: -1px;
+  }
+
+  /* ===== KEYBOARD SHORTCUT / TABLE ===== */
+  .kbd {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-bottom: 2px solid rgba(255,255,255,0.18);
+    border-radius: 5px;
+    padding: 2px 7px;
+    color: var(--heading);
+  }
+  .shortcut-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .shortcut-table th {
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .shortcut-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+    vertical-align: middle;
+    line-height: 1.6;
+  }
+  .shortcut-table tr:last-child td { border-bottom: none; }
+
+  /* ===== ACTION BUTTON (FORMS LINK) ===== */
+  .action-wrapper {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .btn-quiz {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .btn-quiz:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(6, 182, 212, 0.4);
+    background: linear-gradient(135deg, #4338ca 0%, #0891b2 100%);
+  }
+  .btn-quiz .icon-arrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+  }
+  .btn-quiz:hover .icon-arrow {
+    transform: translateX(4px);
+  }
+
+  /* ===== SUMMARY ===== */
+  .summary-bar {
+    margin-top: 40px;
+    background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(52,211,153,0.08));
+    border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 16px;
+    padding: 24px 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .summary-bar .sb-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent1);
+    margin-bottom: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .summary-bar p {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 500px;
+    line-height: 1.7;
+  }
+  .stat-row { display: flex; gap: 24px; }
+  .stat { text-align: center; }
+  .stat .val {
+    font-size: 28px;
+    font-weight: 800;
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--accent1), var(--accent3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .stat .lbl { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
+  .footer {
+    text-align: center;
+    padding: 24px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  strong { font-weight: 700; }
+  em { font-style: normal; color: var(--heading); }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="chapter-badge">
+    <span class="dot"></span>
+    CHAPTER 05 · ใบความรู้
+  </div>
+  <div class="hero-meta">วิชาการประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ &nbsp;|&nbsp; Blockchain & Digital Finance</div>
+  <h1>เทคโนโลยีบล็อกเชนและ<br>โลกการเงิน<span>ดิจิทัล</span></h1>
+  <div class="hero-sub">Blockchain Technology & Digital Financial Systems</div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="content">
+
+  <!-- SECTION 1: BLOCKCHAIN FUNDAMENTALS -->
+  <div class="section-block c1">
+    <div class="section-header">
+      <div class="section-icon">🔗</div>
+      <div>
+        <div class="section-num">TOPIC 01</div>
+        <div class="section-title">ความรู้พื้นฐานเกี่ยวกับเทคโนโลยีการเก็บข้อมูลแบบ Blockchain</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">Blockchain คือ เทคโนโลยีการจัดเก็บข้อมูลแบบกระจายศูนย์ (Distributed Ledger Technology: DLT) ที่มีความปลอดภัยสูง ป้องกันการแก้ไขย้อนหลัง และไม่ต้องพึ่งพาตัวกลางในการตรวจสอบความถูกต้อง</p>
+
+      <h3 class="sub">คุณลักษณะสำคัญของ Blockchain</h3>
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mc-title">🌐 Decentralization</div>
+          <p>การกระจายอำนาจ ไม่มีเครื่องเซิร์ฟเวอร์หลัก แต่ใช้นวด (Nodes) หลายเครื่องช่วยกันบันทึก</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">🔒 Immutability</div>
+          <p>ไม่สามารถเปลี่ยนแปลงหรือแก้ไขข้อมูลย้อนหลังได้ ข้อมูลที่บันทึกแล้วจะคงอยู่ถาวร</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">👁️ Transparency</div>
+          <p>ความโปร่งใส ทุกคนในระบบสามารถเข้าถึงและตรวจสอบประวัติรายการธุรกรรมได้</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">⚡ Cryptography</div>
+          <p>การเข้ารหัสความปลอดภัยระดับสูง ใช้ Hash Function ในการเชื่อมต่อแต่ละบล็อก</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">🤝 Consensus Algorithm</div>
+          <p>กลไกฉันทามติ เช่น PoW หรือ PoS เพื่อให้ทุก Node เห็นตรงกันก่อนบันทึกข้อมูล</p>
+        </div>
+        <div class="mini-card">
+          <div class="mc-title">📄 Smart Contracts</div>
+          <p>สัญญาอัจฉริยะที่ทำหน้าที่ประมวลผลและดำเนินธุรกรรมอัตโนมัติเมื่อครบเงื่อนไข</p>
+        </div>
+      </div>
+
+      <h3 class="sub">ตารางเปรียบเทียบ Centralized vs Decentralized System</h3>
+      <table class="shortcut-table">
+        <thead>
+          <tr><th>ประเด็นเปรียบเทียบ</th><th>ระบบรวมศูนย์ (Centralized)</th><th>ระบบกระจายศูนย์ (Decentralized)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ตัวกลาง (Middleman)</td><td><span class="kbd">มี</span> ธนาคาร หรือผู้ดูแลระบบ</td><td><span class="kbd">ไม่มี</span> ใช้การตรวจสอบโดยเครือข่าย</td></tr>
+          <tr><td>ความเสี่ยงจุดเดียว (SPOF)</td><td><span class="kbd">สูง</span> หากเซิร์ฟเวอร์หลักล่ม ระบบดับทั้งหมด</td><td><span class="kbd">ต่ำมาก</span> มี Node ทำงานทดแทนกันได้</td></tr>
+          <tr><td>ความถูกต้องของข้อมูล</td><td>ควบคุมและแก้ไขโดยผู้ดูแลระบบ</td><td>แก้ไขไม่ได้ ต้องผ่าน Consensus ของเครือข่าย</td></tr>
+          <tr><td>ความเร็ว & ค่าธรรมเนียม</td><td>ขึ้นอยู่กับนโยบายของตัวกลาง</td><td>ขึ้นอยู่กับความหนาแน่นของ Blockchain</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <strong>💡 เคล็ดลับความเข้าใจ:</strong> บล็อกเชนเปรียบเสมือน <em>"สมุดบัญชีสาธารณะ"</em> ที่ทุกคนมีสำเนาเหมือนกัน เมื่อมีรายการใหม่เกิดขึ้น ทุกคนจะช่วยกันตรวจสอบและลงบันทึกพร้อมกัน จึงไม่มีใครแอบแก้ไขตัวเลขคนเดียวได้
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: DIGITAL TRANSACTION -->
+  <div class="section-block c2">
+    <div class="section-header">
+      <div class="section-icon">💸</div>
+      <div>
+        <div class="section-num">TOPIC 02</div>
+        <div class="section-title">การทำธุรกรรมการเงินดิจิทัล (Digital Transaction)</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">ธุรกรรมการเงินดิจิทัลเป็นการแลกเปลี่ยนมูลค่า สินค้า หรือบริการ ผ่านช่องทางอิเล็กทรอนิกส์ ซึ่งช่วยเพิ่มความเร็ว ลดต้นทุน และเชื่อมโยงระบบการเงินทั่วโลกเข้าด้วยกัน</p>
+
+      <h3 class="sub">รูปแบบการทำธุรกรรมการเงินดิจิทัล</h3>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="cb-title">📲 Traditional Digital Banking</div>
+          <ul>
+            <li>Mobile Banking (เช่น K PLUS, SCB EASY)</li>
+            <li>PromptPay ระบบพร้อมเพย์ โอนด้วยเบอร์โทร/เลขบัตร</li>
+            <li>E-Wallet (เช่น TrueMoney Wallet, ShopeePay)</li>
+            <li>Payment Gateway สำหรับร้านค้าออนไลน์</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="cb-title">🌐 Blockchain-Based Finance</div>
+          <ul>
+            <li>P2P Transfer โอนเงินโดยตรงไม่ผ่านธนาคาร</li>
+            <li>DeFi (Decentralized Finance) การเงินไร้ตัวกลาง</li>
+            <li>Cross-Border Transfer โอนเงินข้ามประเทศต้นทุนต่ำ</li>
+            <li>CBDC (Central Bank Digital Currency)</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub">ขั้นตอนพื้นฐานการทำธุรกรรมบน Blockchain</h3>
+      <ul class="num-list">
+        <li><span class="n">1</span><span><strong>Request Transaction</strong> – ผู้ใช้ส่งคำขอทำธุรกรรมผ่าน Digital Wallet</span></li>
+        <li><span class="n">2</span><span><strong>Broadcast to Network</strong> – คำขอถูกกระจายไปยัง Peer-to-Peer Network ของ Nodes</span></li>
+        <li><span class="n">3</span><span><strong>Validation</strong> – Nodes ช่วยกันตรวจสอบความถูกต้องด้วย Cryptography และ Consensus Method</span></li>
+        <li><span class="n">4</span><span><strong>Create Block</strong> – รายการที่ผ่านการตรวจสอบจะถูกรวมเข้าสู่ Block ใหม่</span></li>
+        <li><span class="n">5</span><span><strong>Chain Block & Complete</strong> – เชื่อมต่อ Block เข้ากับ Chain เดิมด้วย Hash และการโอนเสร็จสิ้น</span></li>
+      </ul>
+
+      <div class="highlight-box">
+        <strong>⚡ ข้อควรระวัง:</strong> การทำธุรกรรมบน Blockchain เมื่อกดยืนยันแล้วจะไม่สามารถ <em>"ยกเลิก"</em> หรือ <em>"ดึงเงินคืน"</em> ได้เนื่องจากไม่มีตัวกลาง จึงต้องตรวจสอบ Public Address ของผู้รับให้ถูกต้องทุกครั้ง
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: CRYPTOCURRENCY & RISKS -->
+  <div class="section-block c3">
+    <div class="section-header">
+      <div class="section-icon">🪙</div>
+      <div>
+        <div class="section-num">TOPIC 03</div>
+        <div class="section-title">ความเข้าใจเบื้องต้นเกี่ยวกับ Cryptocurrency และความเสี่ยงที่เกี่ยวข้อง</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">คริปโทเคอร์เรนซี (Cryptocurrency) คือ สินทรัพย์ดิจิทัลที่ออกแบบมาเพื่อใช้เป็นสื่อกลางในการแลกเปลี่ยน โดยใช้การเข้ารหัสทางคณิตศาสตร์ในการควบคุมการสร้างและการทำธุรกรรม</p>
+
+      <h3 class="sub">ประเภทของสินทรัพย์ดิจิทัล</h3>
+      <div class="pill-list">
+        <span class="pill">🪙 Coins (เช่น Bitcoin, Ethereum)</span>
+        <span class="pill">💵 Altcoins (เหรียญทางเลือกอื่น ๆ)</span>
+        <span class="pill">⚖️ Stablecoins (เช่น USDT, USDC)</span>
+        <span class="pill">🎨 NFTs (Non-Fungible Tokens)</span>
+        <span class="pill">🎫 Governance Tokens</span>
+      </div>
+
+      <h3 class="sub">ความเสี่ยงที่ต้องระมัดระวังในการลงทุนและการใช้งาน</h3>
+      <div class="two-col">
+        <div class="col-box">
+          <div class="cb-title">⚠️ ความเสี่ยงด้านเทคนิคและระบบ</div>
+          <ul>
+            <li>ผันผวนของราคาอย่างรุนแรง (High Volatility)</li>
+            <li>ความผิดพลาดของ Smart Contract (Bugs/Exploits)</li>
+            <li>การสูญหายของ Private Key / Seed Phrase</li>
+            <li>การโจมตีทางไซเบอร์ เช่น Phishing, Malware</li>
+          </ul>
+        </div>
+        <div class="col-box">
+          <div class="cb-title">🚨 ความเสี่ยงด้านกฎหมายและการหลอกลวง</div>
+          <ul>
+            <li>แชร์ลูกโซ่และมิจฉาชีพ (Ponzi Scheme / Rug Pull)</li>
+            <li>ข้อบังคับและกฎหมายที่ยังไม่แน่นอนในแต่ละประเทศ</li>
+            <li>การไม่มีการรับประกันเงินฝากเหมือนธนาคารพาณิชย์</li>
+            <li>กระดานซื้อขาย (Exchange) ถูกแฮกหรือปิดตัว</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>🎯 กฎเหล็กของการเรียนรู้เรื่องสินทรัพย์ดิจิทัล:</strong> <em>"DYOR - Do Your Own Research"</em> ศึกษาข้อมูลด้วยตนเองอย่างถี่ถ้วนเสมอ และลงทุนเฉพาะเงินจำนวนที่สามารถรับความเสี่ยงการสูญเสียได้ทั้งหมดเท่านั้น (High Risk, High Return)
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTION BUTTON -->
+  <div class="action-wrapper">
+    <a href="https://forms.gle/7mbYiYPjY5PXLDQ66" target="_blank" class="btn-quiz">
+      <span>📝 คลิกเพื่อทำแบบฝึกหัดประจำบทที่ 5</span>
+      <span class="icon-arrow">-&gt;</span>
+    </a>
+  </div>  
+    
+  <!-- SUMMARY -->
+  <div class="summary-bar">
+    <div>
+      <div class="sb-title">// Summary</div>
+      <p>บทที่ 5 ครอบคลุมการทำงานของ Blockchain ในฐานะเทคโนโลยีเก็บข้อมูลแบบกระจายศูนย์ การทำธุรกรรมการเงินดิจิทัลไร้ตัวกลาง ตลอดจนการทำความเข้าใจคริปโทเคอร์เรนซีและการบริหารจัดการความเสี่ยงอย่างเหมาะสม</p>
+    </div>
+    <div class="stat-row">
+      <div class="stat">
+        <div class="val">3</div>
+        <div class="lbl">หัวข้อหลัก</div>
+      </div>
+      <div class="stat">
+        <div class="val">DLT</div>
+        <div class="lbl">เทคโนโลยี<br>ฐานกระจายศูนย์</div>
+      </div>
+      <div class="stat">
+        <div class="val">DYOR</div>
+        <div class="lbl">หลักการจัดการ<br>ความเสี่ยง</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  ห้องเรียนครูวิมมี่ วิชาการประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ
+</div>
+
+</body>
+</html>
