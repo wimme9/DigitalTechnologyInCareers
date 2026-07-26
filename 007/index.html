@@ -562,7 +562,7 @@
   </div>
 
   <div class="action-wrapper">
-    <a href="https://forms.gle/pYiN6tZFvD2gJvd96" target="_blank" class="btn-quiz">
+    <a href="https://forms.gle/29TdH9YBsZSQGqN98" target="_blank" class="btn-quiz">
       📝 คลิกเพื่อทำแบบฝึกหัดประจำบทที่ 7
     </a>
   </div>  
@@ -597,12 +597,3 @@
 
 </body>
 </html>
-"""
-
-# Save to html file
-with open("chapter7.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-# Convert to PDF
-weasyprint.HTML("chapter7.html").write_pdf("chapter7_cyber_security.pdf")
-print("PDF output generated successfully!")
