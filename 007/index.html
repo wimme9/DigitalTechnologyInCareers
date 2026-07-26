@@ -1,1 +1,608 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>บทที่ 7 – ความมั่นคงปลอดภัยทางดิจิทัล (Cyber Security)</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  @page {
+    size: A4;
+    margin: 12mm;
+    background-color: #0a0e1a;
+  }
 
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --card: #141c2e;
+    --border: rgba(99,179,237,0.15);
+    --accent1: #38bdf8;
+    --accent2: #f43f5e;
+    --accent3: #34d399;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --heading: #f8fafc;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 36px 32px 30px;
+    background: linear-gradient(135deg, #0a0e1a 0%, #1e1b4b 50%, #0a1628 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent1);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+  .hero h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--heading);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .hero h1 span {
+    background: linear-gradient(90deg, var(--accent1), #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 13.5px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .chapter-badge {
+    display: inline-block;
+    background: rgba(56,189,248,0.1);
+    border: 1px solid rgba(56,189,248,0.3);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent1);
+    margin-bottom: 14px;
+  }
+
+  /* ===== CONTENT ===== */
+  .content {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .section-block {
+    margin-bottom: 24px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card);
+    position: relative;
+    page-break-inside: auto;
+  }
+  .section-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .section-block.c1::before { background: linear-gradient(90deg, var(--accent2), #fb7185); }
+  .section-block.c2::before { background: linear-gradient(90deg, var(--accent1), #818cf8); }
+  .section-block.c3::before { background: linear-gradient(90deg, var(--accent3), #6ee7b7); }
+
+  .section-header {
+    display: table;
+    width: 100%;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-icon-cell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 44px;
+  }
+  .section-title-cell {
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 12px;
+  }
+  .section-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+  }
+  .c1 .section-icon { background: rgba(244,63,94,0.15); }
+  .c2 .section-icon { background: rgba(56,189,248,0.15); }
+  .c3 .section-icon { background: rgba(52,211,153,0.15); }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+  }
+  .c1 .section-num { color: var(--accent2); }
+  .c2 .section-num { color: var(--accent1); }
+  .c3 .section-num { color: var(--accent3); }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--heading);
+    line-height: 1.3;
+  }
+  .section-body { padding: 18px 20px 20px; }
+
+  .lead {
+    font-size: 13.5px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.8;
+    border-left: 3px solid rgba(255,255,255,0.08);
+    padding-left: 12px;
+  }
+  h3.sub {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--heading);
+    margin: 16px 0 10px;
+    page-break-after: avoid;
+  }
+  .c1 h3.sub { color: var(--accent2); }
+  .c2 h3.sub { color: var(--accent1); }
+  .c3 h3.sub { color: var(--accent3); }
+
+  .mini-grid {
+    display: table;
+    width: 100%;
+    margin-top: 10px;
+    border-spacing: 8px;
+  }
+  .mini-row {
+    display: table-row;
+  }
+  .mini-card {
+    display: table-cell;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
+    padding: 12px;
+    width: 33%;
+    vertical-align: top;
+  }
+  .mini-card .mc-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--heading);
+    margin-bottom: 4px;
+  }
+  .mini-card p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .pill-list {
+    margin-top: 10px;
+  }
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 11.5px;
+    font-weight: 600;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .c1 .pill { background: rgba(244,63,94,0.12); color: #fb7185; border: 1px solid rgba(244,63,94,0.2); }
+  .c2 .pill { background: rgba(56,189,248,0.12); color: #7dd3fc; border: 1px solid rgba(56,189,248,0.2); }
+  .c3 .pill { background: rgba(52,211,153,0.12); color: #6ee7b7; border: 1px solid rgba(52,211,153,0.2); }
+
+  .num-list { list-style: none; margin-top: 8px; }
+  .num-list li {
+    display: table;
+    width: 100%;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+  .num-list li .n-cell {
+    display: table-cell;
+    width: 28px;
+    vertical-align: top;
+  }
+  .num-list li .text-cell {
+    display: table-cell;
+    vertical-align: top;
+  }
+  .num-list li .n {
+    width: 20px; height: 20px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 20px;
+    font-size: 10.5px;
+    font-weight: 700;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+  .c1 .num-list li .n { background: rgba(244,63,94,0.15); color: var(--accent2); }
+  .c2 .num-list li .n { background: rgba(56,189,248,0.15); color: var(--accent1); }
+  .c3 .num-list li .n { background: rgba(52,211,153,0.15); color: var(--accent3); }
+
+  .highlight-box {
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 12px;
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--text);
+    page-break-inside: avoid;
+  }
+  .c1 .highlight-box { background: rgba(244,63,94,0.07); border-left: 3px solid var(--accent2); }
+  .c2 .highlight-box { background: rgba(56,189,248,0.07); border-left: 3px solid var(--accent1); }
+  .c3 .highlight-box { background: rgba(52,211,153,0.07); border-left: 3px solid var(--accent3); }
+
+  .two-col-table {
+    display: table;
+    width: 100%;
+    margin-top: 10px;
+    border-spacing: 10px;
+  }
+  .two-col-row { display: table-row; }
+  .col-box {
+    display: table-cell;
+    width: 50%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 8px;
+    padding: 12px;
+    vertical-align: top;
+  }
+  .col-box .cb-title {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .c1 .col-box .cb-title { color: var(--accent2); }
+  .c2 .col-box .cb-title { color: var(--accent1); }
+  .c3 .col-box .cb-title { color: var(--accent3); }
+
+  .col-box ul { list-style: none; }
+  .col-box ul li {
+    font-size: 12.5px;
+    color: var(--text);
+    padding: 2px 0;
+    line-height: 1.5;
+  }
+
+  .shortcut-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 12.5px;
+  }
+  .shortcut-table th {
+    text-align: left;
+    padding: 6px 10px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+  .shortcut-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: var(--text);
+    vertical-align: middle;
+  }
+
+  .action-wrapper {
+    margin: 28px 0;
+    text-align: center;
+  }
+  .btn-quiz {
+    display: inline-block;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #e11d48 0%, #0284c7 100%);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  /* ===== SUMMARY ===== */
+  .summary-bar {
+    margin-top: 24px;
+    background: linear-gradient(135deg, rgba(244,63,94,0.08), rgba(56,189,248,0.08));
+    border: 1px solid rgba(56,189,248,0.2);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: table;
+    width: 100%;
+  }
+  .sb-left { display: table-cell; vertical-align: middle; }
+  .sb-right { display: table-cell; vertical-align: middle; text-align: right; width: 200px; }
+  .summary-bar .sb-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent1);
+    margin-bottom: 2px;
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
+  }
+  .summary-bar p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .stat-box { display: inline-block; text-align: center; margin-left: 14px; }
+  .stat-box .val {
+    font-size: 22px;
+    font-weight: 800;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent1);
+  }
+  .stat-box .lbl { font-size: 10px; color: var(--muted); }
+
+  .footer {
+    text-align: center;
+    padding: 20px 0 10px;
+    font-size: 10.5px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  strong { font-weight: 700; }
+  em { font-style: normal; color: var(--heading); }
+</style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="chapter-badge">CHAPTER 07 · ใบความรู้</div>
+  <div class="hero-meta">วิชาการประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ &nbsp;|&nbsp; Digital Security & Privacy</div>
+  <h1>ความมั่นคงปลอดภัยทางดิจิทัล<br><span>(Cyber Security)</span></h1>
+  <div class="hero-sub">สร้างภูมิคุ้มกันทางไซเบอร์ ปกป้องข้อมูลส่วนบุคคล และความปลอดภัยในองค์กร</div>
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div class="content">
+
+  <!-- SECTION 1: CYBER THREATS -->
+  <div class="section-block c1">
+    <div class="section-header">
+      <div class="section-icon-cell">
+        <div class="section-icon">🛡️</div>
+      </div>
+      <div class="section-title-cell">
+        <div class="section-num">TOPIC 01</div>
+        <div class="section-title">ภัยคุกคามทางไซเบอร์ในปัจจุบันและการป้องกัน (Cyber Threats & Defense)</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">ภัยคุกคามทางไซเบอร์มีการเปลี่ยนแปลงและพัฒนาอย่างรวดเร็ว การเข้าใจรูปแบบการโจมตีและการป้องกันเป็นก้าวแรกที่สำคัญในการปกป้องตนเองและองค์กร</p>
+
+      <h3 class="sub">ภัยคุกคามไซเบอร์ที่พบได้บ่อยในปัจจุบัน</h3>
+      <div class="mini-grid">
+        <div class="mini-row">
+          <div class="mini-card">
+            <div class="mc-title">🎣 Phishing</div>
+            <p>การหลอกลวงผ่านอีเมล SMS หรือเว็บปลอม เพื่อขโมยรหัสผ่านและข้อมูลทางการเงิน</p>
+          </div>
+          <div class="mini-card">
+            <div class="mc-title">🔒 Ransomware</div>
+            <p>มัลแวร์เรียกค่าไถ่ที่ทำการเข้ารหัสไฟล์ข้อมูลในเครื่องเพื่อขู่เอาเงินแลกกับการปลดล็อก</p>
+          </div>
+          <div class="mini-card">
+            <div class="mc-title">🎭 Social Engineering</div>
+            <p>วิศวกรรมศาสตร์ทางสังคม ใช้การจิตวิทยาหลอกลวงให้เหยื่อหลงเชื่อและส่งมอบข้อมูลสำคัญ</p>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">แนวทางและหลักการป้องกันตนเอง</h3>
+      <table class="shortcut-table">
+        <thead>
+          <tr><th>ประเภทการป้องกัน</th><th>แนวทางปฏิบัติ</th><th>ประโยชน์</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>ตั้งรหัสผ่านปลอดภัย</td><td>ใช้ความยาว 12+ ตัวอักษร ผสมตัวเลข/สัญลักษณ์</td><td>ลดการถูกสุ่มรหัสผ่าน (Brute Force)</td></tr>
+          <tr><td>ระบบยืนยันตัวตน (2FA)</td><td>เปิดใช้งาน Two-Factor Authentication ทุกบัญชี</td><td>เพิ่มเกราะป้องกันอีกชั้นแม้รหัสหลุด</td></tr>
+          <tr><td>อัปเดตระบบซอฟต์แวร์</td><td>อัปเดต OS และโปรแกรมสม่ำเสมอ</td><td>อุดช่องโหว่ความปลอดภัย (Security Patches)</td></tr>
+          <tr><td>ตรวจสอบการลิงก์/ไฟล์</td><td>ไม่คลิกลิงก์แปลกปลอมหรือดาวน์โหลดไฟล์ไม่น่าเชื่อถือ</td><td>ป้องกันการติดมัลแวร์และไวรัส</td></tr>
+        </tbody>
+      </table>
+
+      <div class="highlight-box">
+        <strong>⚠️ คำเตือนสำคัญ:</strong> อย่าใช้รหัสผ่านเดียวกับทุกบริการออนไลน์ และระวังอีเมลฉุกเฉินขู่เร่งด่วน เช่น "บัญชีของคุณจะถูกระงับใน 24 ชม." มักจะเป็นกลอุบายของ Phishing
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PRIVACY & DATA MANAGEMENT -->
+  <div class="section-block c2">
+    <div class="section-header">
+      <div class="section-icon-cell">
+        <div class="section-icon">🔐</div>
+      </div>
+      <div class="section-title-cell">
+        <div class="section-num">TOPIC 02</div>
+        <div class="section-title">การจัดการข้อมูลส่วนบุคคลและความเป็นส่วนตัว (Privacy & PDPA)</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">ในยุคเศรษฐกิจดิจิทัล ข้อมูลส่วนบุคคล (Personal Data) มีมูลค่าสูงมาก การตระหนักถึงสิทธิและความเป็นส่วนตัวจึงเป็นเรื่องที่ทุกคนต้องให้ความสำคัญ</p>
+
+      <h3 class="sub">หลักการสำคัญของ พ.ร.บ. คุ้มครองข้อมูลส่วนบุคคล (PDPA)</h3>
+      <ul class="num-list">
+        <li>
+          <div class="n-cell"><div class="n">1</div></div>
+          <div class="text-cell"><strong>Consent (ความยินยอม)</strong> – การเก็บรวบรวม ใช้ หรือเปิดเผยข้อมูลต้องได้รับความยินยอมชัดเจนจากเจ้าของข้อมูล</div>
+        </li>
+        <li>
+          <div class="n-cell"><div class="n">2</div></div>
+          <div class="text-cell"><strong>Purpose Limitation (ขอบเขตวัตถุประสงค์)</strong> – นำข้อมูลไปใช้ตรงตามวัตถุประสงค์ที่แจ้งไว้เท่านั้น ห้ามนำไปใช้ผิดวัตถุประสงค์</div>
+        </li>
+        <li>
+          <div class="n-cell"><div class="n">3</div></div>
+          <div class="text-cell"><strong>Data Minimization (เก็บเท่าที่จำเป็น)</strong> – เก็บรวบรวมข้อมูลส่วนบุคคลเพียงเท่าที่จำเป็นต่อการใช้งานจริง</div>
+        </li>
+        <li>
+          <div class="n-cell"><div class="n">4</div></div>
+          <div class="text-cell"><strong>Data Subject Rights (สิทธิของเจ้าของข้อมูล)</strong> – สิทธิในการขอเข้าถึง ถอนความยินยอม หรือขอให้ลบข้อมูลส่วนบุคคล</div>
+        </li>
+      </ul>
+
+      <h3 class="sub">การดูแลความเป็นส่วนตัวในการทำงานและชีวิตประจำวัน</h3>
+      <div class="two-col-table">
+        <div class="two-col-row">
+          <div class="col-box">
+            <div class="cb-title">🌐 สื่อสังคมออนไลน์ (Social Media)</div>
+            <ul>
+              <li>• ตั้งค่าความเป็นส่วนตัวของโพสต์</li>
+              <li>• หลีกเลี่ยงการโพสต์ตำแหน่งที่อยู่ตั้ง/ตั๋วเดินทาง</li>
+              <li>• ระวังการแชร์ภาพบัตรประชาชน/เอกสารสำคัญ</li>
+            </ul>
+          </div>
+          <div class="col-box">
+            <div class="cb-title">💻 อุปกรณ์และการท่องเว็บ</div>
+            <ul>
+              <li>• ปฏิเสธ Cookies ที่ไม่จำเป็น</li>
+              <li>• ใช้การเรียกดูแบบซ่อนตัว (Incognito) บนเครื่องสาธารณะ</li>
+              <li>• ล้างประวัติการท่องเว็บ (Browser Cache) เป็นประจำ</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <strong>💡 เคล็ดลับมืออาชีพ:</strong> ก่อนแชร์ข้อมูลหรือภาพถ่ายผู้อื่นลงในสื่อออนไลน์ ควรได้รับความยินยอมก่อนเสมอเพื่อเคารพสิทธิความเป็นส่วนตัวและไม่ละเมิดกฎหมาย PDPA
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: ORGANIZATIONAL SECURITY -->
+  <div class="section-block c3">
+    <div class="section-header">
+      <div class="section-icon-cell">
+        <div class="section-icon">🏢</div>
+      </div>
+      <div class="section-title-cell">
+        <div class="section-num">TOPIC 03</div>
+        <div class="section-title">แนวทางการรักษาความปลอดภัยของข้อมูลในองค์กรและอาชีพ (Organizational Security)</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <p class="lead">การรักษาความมั่นคงปลอดภัยของข้อมูลเป็นหน้าที่ของบุคลากรทุกคนในองค์กร ไม่ใช่เพียงแค่หน้าที่ของฝ่าย IT เพื่อป้องกันความเสียหายต่อธุรกิจและน่าเชื่อถือ</p>
+
+      <h3 class="sub">แนวทางปฏิบัติเพื่อความปลอดภัยใน workplace</h3>
+      <div class="two-col-table">
+        <div class="two-col-row">
+          <div class="col-box">
+            <div class="cb-title">🖥️ Clean Desk & Clean Screen</div>
+            <ul>
+              <li>• ล็อกหน้าจอทุกครั้งที่ลุกออกจากโต๊ะทำงาน (<span style="font-family: monospace;">Win + L</span>)</li>
+              <li>• ไม่เขียนรหัสผ่านติดไว้ที่หน้าจอหรือโต๊ะ</li>
+              <li>• เก็บเอกสารสำคัญเข้าตู้ล็อกเสมอ</li>
+            </ul>
+          </div>
+          <div class="col-box">
+            <div class="cb-title">💾 Data Backup & Encryption</div>
+            <ul>
+              <li>• สำรองข้อมูลตามหลักการ 3-2-1 สำคัญมาก</li>
+              <li>• เข้ารหัสไฟล์สำคัญก่อนส่งผ่านอีเมล/คลาวด์</li>
+              <li>• หลีกเลี่ยงการใช้ Flash Drive ร่วมกัน</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="sub">นโยบายความปลอดภัยที่องค์กรยุคใหม่นำมาใช้</h3>
+      <div class="pill-list">
+        <span class="pill">1️⃣ Zero Trust Architecture</span>
+        <span class="pill">2️⃣ IAM (Identity & Access Management)</span>
+        <span class="pill">3️⃣ Incident Response Plan</span>
+        <span class="pill">4️⃣ Bring Your Own Device (BYOD) Policy</span>
+        <span class="pill">5️⃣ Security Awareness Training</span>
+      </div>
+
+      <div class="highlight-box">
+        <strong>🎯 หลักการ 3-2-1 Backup:</strong> เก็บข้อมูลไว้ <em>3 สำเนา</em> บนสื่อบันทึกอย่างน้อย <em>2 ประเภท</em> และเก็บไว้นอกสถานที่ (Off-site / Cloud) อย่างน้อย <em>1 แห่ง</em> เพื่อป้องกันข้อมูลสูญหายจากภัยพิบัติ
+      </div>
+    </div>
+  </div>
+
+  <div class="action-wrapper">
+    <a href="https://forms.gle/7mbYiYPjY5PXLDQ66" target="_blank" class="btn-quiz">
+      📝 คลิกเพื่อทำแบบฝึกหัดประจำบทที่ 7
+    </a>
+  </div>  
+    
+  <!-- SUMMARY -->
+  <div class="summary-bar">
+    <div class="sb-left">
+      <div class="sb-title">// SUMMARY</div>
+      <p>บทที่ 7 เน้นย้ำความสำคัญของการสร้างความมั่นคงปลอดภัยทางดิจิทัล ทั้งการรับมือภัยคุกคามไซเบอร์ การปฏิบัติตามกฎหมาย PDPA เพื่อคุ้มครองข้อมูลส่วนบุคคล และการปฏิบัติตามมาตรการความปลอดภัยในองค์กรอย่างเคร่งครัด</p>
+    </div>
+    <div class="sb-right">
+      <div class="stat-box">
+        <div class="val">3</div>
+        <div class="lbl">หัวข้อหลัก</div>
+      </div>
+      <div class="stat-box">
+        <div class="val">2FA</div>
+        <div class="lbl">การป้องกัน<br>สำคัญ</div>
+      </div>
+      <div class="stat-box">
+        <div class="val">3-2-1</div>
+        <div class="lbl">หลักการ<br>Backup</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  ห้องเรียนครูวิมมี่ วิชาการประยุกต์ใช้เทคโนโลยีดิจิทัลในงานอาชีพ
+</div>
+
+</body>
+</html>
+"""
+
+# Save to html file
+with open("chapter7.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+# Convert to PDF
+weasyprint.HTML("chapter7.html").write_pdf("chapter7_cyber_security.pdf")
+print("PDF output generated successfully!")
